@@ -19,10 +19,10 @@ const (
 )
 
 func main() {
-	os.Exit(realMain())
+	os.Exit(runCli())
 }
 
-func realMain() int {
+func runCli() int {
 	ui := &cli.BasicUi{Writer: os.Stdout, ErrorWriter: os.Stderr}
 	c, exitCode := createNS1Cli(ui)
 	if exitCode != 0 {
