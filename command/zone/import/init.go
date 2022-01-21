@@ -35,4 +35,6 @@ func (c *cmd) Help() string {
 const synopsis = "Import a zonefile"
 const help = `
 Usage: ns1 zone import ZONEFILE
+
+Note: The filename is used as the imported zone name.
 `

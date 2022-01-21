@@ -13,10 +13,9 @@ import (
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
-const (
-	NAME    = "ns1"
-	VERSION = "1.0.0"
-)
+const NAME = "ns1"
+
+var VERSION string
 
 func main() {
 	os.Exit(runCli())
