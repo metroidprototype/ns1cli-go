@@ -1,4 +1,4 @@
-package info
+package imp
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
@@ -13,7 +13,7 @@ type cmd struct {
 }
 
 func init() {
-	command.Register("zone info", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	command.Register("zone import", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {
@@ -32,7 +32,7 @@ func (c *cmd) Help() string {
 	return help
 }
 
-const synopsis = "View details on a single zone"
+const synopsis = "Import a zonefile"
 const help = `
-Usage: ns1 zone info ZONE
+Usage: ns1 zone import ZONEFILE
 `

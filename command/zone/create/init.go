@@ -28,11 +28,6 @@ func (c *cmd) Help() string {
 	return help
 }
 
-func (c *cmd) Run(args []string) int {
-	c.UI.Warn("TODO: not implemented")
-	return cli.RunResultHelp
-}
-
 const synopsis = "Create a zone"
 const help = `
 Usage: ns1 zone create [options] ZONE
