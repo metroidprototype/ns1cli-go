@@ -1,3 +1,4 @@
+// https://ns1.com/api#delete-delete-a-zone
 package delete
 
 import (

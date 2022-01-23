@@ -1,3 +1,4 @@
+// https://ns1.com/api#get-view-zone-details
 package info
 
 import (
