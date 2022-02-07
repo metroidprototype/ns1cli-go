@@ -35,5 +35,5 @@ func (c *cmd) Help() string {
 
 const synopsis = "View details on a single record"
 const help = `
-Usage: ns1 record info ZONE DOMAIN TYPE
+Usage: ns1 record info ZONENAME DOMAIN TYPE
 `
