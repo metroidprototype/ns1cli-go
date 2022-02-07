@@ -11,10 +11,10 @@ func (c *cmd) Run(args []string) int {
 		return 1
 	}
 	zone := args[0]
-	z, h, err := c.ns1.Zones.Get(zone)
+	z, _, err := c.ns1.Zones.Get(zone)
 	if err != nil {
 		c.UI.Error(err.Error())
-		return h.StatusCode
+		return 1
 	}
 	c.UI.Info(helper.FormatZone(z))
 	return 0
