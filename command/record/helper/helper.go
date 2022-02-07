@@ -9,9 +9,11 @@ import (
 )
 
 func FormatRecord(rec *dns.Record) string {
-	result := []string{"Domain | TTL | Type | Answers"}
-	result = append(result, fmt.Sprintf("%s | %d | %s | %s",
-		rec.Domain, rec.TTL, rec.Type, rec.Answers,
-	))
+	result := []string{
+		"Domain | TTL | Type | Answers",
+		fmt.Sprintf("%s | %d | %s | %s",
+			rec.Domain, rec.TTL, rec.Type, rec.Answers,
+		),
+	}
 	return columnize.SimpleFormat(result)
 }
