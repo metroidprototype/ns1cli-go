@@ -24,6 +24,7 @@ func new(ui cli.Ui, a *api.Client) *cmd {
 	}
 	return c
 }
+
 func (c *cmd) Synopsis() string {
 	return synopsis
 }
