@@ -8,14 +8,13 @@ import (
 
 	"github.com/metroidprototype/ns1cli-go/command"
 	_ "github.com/metroidprototype/ns1cli-go/command/all"
+	"github.com/metroidprototype/ns1cli-go/version"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
 const NAME = "ns1"
-
-var VERSION string
 
 func main() {
 	os.Exit(runCli())
@@ -35,10 +34,14 @@ func runCli() int {
 		Commands:     cmds,
 		Autocomplete: true,
 		Name:         NAME,
-		Version:      VERSION,
+		Version:      version.Version,
 		HelpFunc:     cli.FilteredHelpFunc(names, cli.BasicHelpFunc(NAME)),
 		HelpWriter:   os.Stdout,
 		ErrorWriter:  os.Stderr,
+	}
+
+	if cli.IsVersion() {
+		cli.Args = []string{"version"}
 	}
 
 	exitCode, err := cli.Run()
