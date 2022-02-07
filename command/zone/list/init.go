@@ -9,15 +9,19 @@ import (
 )
 
 type cmd struct {
-	UI cli.Ui
+	UI  cli.Ui
+	ns1 *api.Client
 }
 
 func init() {
-	command.Register("zone list", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui), nil })
+	command.Register("zone list", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
 }
 
-func new(ui cli.Ui) *cmd {
-	c := &cmd{UI: ui}
+func new(ui cli.Ui, a *api.Client) *cmd {
+	c := &cmd{
+		UI:  ui,
+		ns1: a,
+	}
 	return c
 }
 
@@ -27,11 +31,6 @@ func (c *cmd) Synopsis() string {
 
 func (c *cmd) Help() string {
 	return help
-}
-
-func (c *cmd) Run(args []string) int {
-	c.UI.Warn("TODO: not implemented")
-	return cli.RunResultHelp
 }
 
 const synopsis = "List all zones"
