@@ -35,5 +35,5 @@ func (c *cmd) Help() string {
 
 const synopsis = "View details on a single zone"
 const help = `
-Usage: ns1 zone info ZONE
+Usage: ns1 zone info ZONENAME
 `
