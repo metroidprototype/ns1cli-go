@@ -36,4 +36,8 @@ func (c *cmd) Help() string {
 const synopsis = "Create a zone"
 const help = `
 Usage: ns1 zone create [options] ZONE
+
+Example: ns1 zone create '{"zone":"example.com", "nx_ttl":60}'
+
+Ful payload deatuls can be found here: https://ns1.com/api#put-create-a-new-zone
 `

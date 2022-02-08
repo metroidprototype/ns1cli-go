@@ -36,4 +36,8 @@ func (c *cmd) Help() string {
 const synopsis = "Update a zone"
 const help = `
 Usage: ns1 zone update [options] ZONE
+
+Example: ns1 zone update  '{"zone":"example.com", "nx_ttl":30, "expiry": 0}'
+
+Full payload deatuls can be found here: https://ns1.com/api#post-edit-a-zone
 `

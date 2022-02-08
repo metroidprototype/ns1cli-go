@@ -35,5 +35,5 @@ func (c *cmd) Help() string {
 
 const synopsis = "Delete a record"
 const help = `
-Usage: ns1 record delete [options] ZONENAME DOMAIN TYPE
+Usage: ns1 record delete [options] ZONENAME FQDN TYPE
 `

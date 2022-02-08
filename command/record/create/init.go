@@ -35,5 +35,9 @@ func (c *cmd) Help() string {
 
 const synopsis = "Create a record on a zone"
 const help = `
-Usage: ns1 record create [options] ZONENAME DOMAIN TYPE
+Usage: ns1 record create [options] ZONE
+
+Example: ns1 record create '{"zone":"example.com", "domain":"arecord.example.com", "type":"A", "answers":[{"answer":["1.2.3.4"]}]}'
+
+Full payload details can be found here: https://ns1.com/api#putcreate-a-dns-record
 `

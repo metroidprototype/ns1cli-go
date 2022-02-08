@@ -35,5 +35,9 @@ func (c *cmd) Help() string {
 
 const synopsis = "Update a record"
 const help = `
-Usage: ns1 record update [options] ZONENAME DOMAIN TYPE
+Usage: ns1 record update [options] ZONE
+
+Example: ns1 record update '{"zone":"example.com", "domain":"arecord.example.com", "type":"A", "answers":[{"answer":["1.2.3.5"]}]}'
+
+Full payload details can be found here: https://ns1.com/api#postupdate-a-record
 `
