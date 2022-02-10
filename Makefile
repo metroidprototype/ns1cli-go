@@ -18,10 +18,6 @@ deps:
 fmt:
 	go fmt ./...
 
-test: deps
-	go test -cover $(shell go list ./... | xargs)
-
-
 build.%:
 	[ -d dist ] || mkdir dist
 	GOOS=$* $(BUILD_CMD) $(LD_OPTS) -o dist/$(NAME)-$* .
