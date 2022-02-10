@@ -13,7 +13,10 @@ type cmd struct {
 }
 
 func init() {
-	command.Register("version", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui), nil })
+	err := command.Register("version", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui), nil })
+	if err != nil {
+		panic(err)
+	}
 }
 
 func new(ui cli.Ui) *cmd {

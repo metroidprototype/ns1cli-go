@@ -11,15 +11,16 @@ import (
 type Factory func(cli.Ui, *api.Client) (cli.Command, error)
 
 // Register adds a new CLI sub-command to the registry.
-func Register(name string, fn Factory) {
+func Register(name string, fn Factory) error {
 	if registry == nil {
 		registry = make(map[string]Factory)
 	}
 
 	if registry[name] != nil {
-		panic(fmt.Errorf("command %q is already registered", name))
+		return fmt.Errorf("command %q is already registered", name)
 	}
 	registry[name] = fn
+	return nil
 }
 
 // RegisterdCommands returns a mapping of all registered commands, and a
