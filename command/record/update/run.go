@@ -10,7 +10,7 @@ import (
 
 func (c *cmd) Run(args []string) int {
 	if len(args) != 1 {
-		c.UI.Error("record create ony accepts a single argument")
+		c.UI.Error("record create requires a single argument")
 		c.UI.Info(c.Help())
 		return 1
 	}

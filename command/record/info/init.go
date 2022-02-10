@@ -13,8 +13,10 @@ type cmd struct {
 	ns1 *api.Client
 }
 
+var cmd_name = "record info"
+
 func init() {
-	err := command.Register("record info", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	err := command.Register(cmd_name, func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
 	if err != nil {
 		panic(err)
 	}
