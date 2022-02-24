@@ -1,3 +1,4 @@
+// This package implements the zone list API
 // https://ns1.com/api#get-list-all-zones
 package list
 
@@ -14,7 +15,10 @@ type cmd struct {
 }
 
 func init() {
-	command.Register("zone list", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	err := command.Register("zone list", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	if err != nil {
+		panic(err)
+	}
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {

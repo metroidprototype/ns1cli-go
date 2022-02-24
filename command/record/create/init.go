@@ -1,3 +1,4 @@
+// This package implements the record create API
 // https://ns1.com/api#putcreate-a-dns-record
 package create
 
@@ -13,8 +14,13 @@ type cmd struct {
 	ns1 *api.Client
 }
 
+var cmd_name = "record create"
+
 func init() {
-	command.Register("record create", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	err := command.Register(cmd_name, func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui, a), nil })
+	if err != nil {
+		panic(err)
+	}
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {

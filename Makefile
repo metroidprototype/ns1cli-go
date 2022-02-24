@@ -17,7 +17,7 @@ deps:
 
 fmt:
 	go fmt ./...
-
+go test -coverprofile=coverage.out ./...
 build.%:
 	[ -d dist ] || mkdir dist
 	GOOS=$* $(BUILD_CMD) $(LD_OPTS) -o dist/$(NAME)-$* .
@@ -26,4 +26,5 @@ build-all: build.darwin build.linux build.windows
 	@mv dist/ns1-windows dist/ns1-windows.exe
 
 test: deps
-	go test -cover $(shell go list ./... | xargs)
+	go test -coverprofile=coverage.out -cover $(shell go list ./... | xargs)
+	go tool cover -html=coverage.out
