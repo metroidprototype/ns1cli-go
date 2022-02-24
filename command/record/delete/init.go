@@ -1,3 +1,4 @@
+// This package implements the record delete API
 // https://ns1.com/api#deletedelete-a-record
 package delete
 

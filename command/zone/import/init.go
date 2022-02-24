@@ -1,3 +1,4 @@
+// This package implements the zonefile import API
 // https://ns1.com/api#put-import-a-zone-from-a-zone-file
 package imp
 

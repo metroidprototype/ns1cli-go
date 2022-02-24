@@ -1,3 +1,4 @@
+// This package implements the update record command
 // https://ns1.com/api#postupdate-a-record
 package update
 

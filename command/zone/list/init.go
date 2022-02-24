@@ -1,3 +1,4 @@
+// This package implements the zone list API
 // https://ns1.com/api#get-list-all-zones
 package list
 

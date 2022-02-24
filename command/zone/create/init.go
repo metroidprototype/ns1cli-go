@@ -1,3 +1,4 @@
+// This package implements the zone create API
 // https://ns1.com/api#put-create-a-new-zone
 package create
 

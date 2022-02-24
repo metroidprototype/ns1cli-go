@@ -1,3 +1,4 @@
+// This package implements the record create API
 // https://ns1.com/api#putcreate-a-dns-record
 package create
 

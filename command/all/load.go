@@ -1,6 +1,6 @@
+// This package initializes all top level commands via their init() functions
 package all
 
-// This package registers all top level commands
 import (
 	_ "github.com/metroidprototype/ns1cli-go/command/record"
 	_ "github.com/metroidprototype/ns1cli-go/command/version"

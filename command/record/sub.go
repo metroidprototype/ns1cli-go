@@ -1,6 +1,6 @@
+// This package manages all NS1 record APIs
 package record
 
-// This file registers all subcommands for the record command path
 import (
 	_ "github.com/metroidprototype/ns1cli-go/command/record/create"
 	_ "github.com/metroidprototype/ns1cli-go/command/record/delete"

@@ -1,3 +1,4 @@
+// This package implements internal client version call
 package version
 
 import (

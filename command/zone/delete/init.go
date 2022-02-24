@@ -1,3 +1,4 @@
+// This package implements the zone delete API
 // https://ns1.com/api#delete-delete-a-zone
 package delete
 

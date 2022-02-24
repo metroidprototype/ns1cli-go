@@ -1,4 +1,5 @@
-// https://ns1.com/api#get-view-zone-details
+// This package implements the record info API
+// https://ns1.com/api#getview-record-details
 package info
 
 import (

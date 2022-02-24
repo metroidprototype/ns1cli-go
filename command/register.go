@@ -1,3 +1,4 @@
+// The command package provides a global registry of commands for the cli.
 package command
 
 import (
