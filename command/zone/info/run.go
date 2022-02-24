@@ -1,6 +1,8 @@
 package info
 
 import (
+	"fmt"
+
 	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
 )
 
@@ -15,6 +17,10 @@ func (c *cmd) Run(args []string) int {
 	if err != nil {
 		c.UI.Error(err.Error())
 		return 1
+	}
+	fmt.Printf("%#v\n", z)
+	for _, r := range z.Records {
+		fmt.Printf("%#v\n", r)
 	}
 	c.UI.Info(helper.FormatZone(z))
 	return 0
