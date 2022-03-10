@@ -16,6 +16,7 @@ func (c *cmd) Run(args []string) int {
 		c.UI.Error(err.Error())
 		return 1
 	}
+
 	c.UI.Info(helper.FormatZone(z))
 	return 0
 }
