@@ -6,6 +6,7 @@ require (
 	github.com/mitchellh/cli v1.1.0
 	github.com/ryanuber/columnize v2.1.2+incompatible
 	github.com/stretchr/testify v1.7.0
+	github.com/uber-go/flagoverride v0.0.0-20170206062631-b709bacc28f5
 	gopkg.in/ns1/ns1-go.v2 v2.6.3
 )
 

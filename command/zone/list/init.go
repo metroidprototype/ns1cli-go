@@ -4,14 +4,14 @@ package list
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
+	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
 type cmd struct {
-	UI  cli.Ui
-	ns1 *api.Client
+	helper.Cmd
 }
 
 func init() {
@@ -22,11 +22,12 @@ func init() {
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {
-	c := &cmd{
-		UI:  ui,
-		ns1: a,
+	return &cmd{
+		Cmd: helper.Cmd{
+			Ui:  ui,
+			Ns1: a,
+		},
 	}
-	return c
 }
 
 func (c *cmd) Synopsis() string {
@@ -39,5 +40,12 @@ func (c *cmd) Help() string {
 
 const synopsis = "List all zones"
 const help = `
-Usage: ns1 zone list [options]
+Usage:
+  ns1 zone list [OPTIONS]
+
+Options:
+  -qps - include QPS metrics on each zone over the last 24h; Note: may increase response time
+
+Example:
+  ns1 zone list
 `

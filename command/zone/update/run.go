@@ -4,26 +4,27 @@ import (
 	"encoding/json"
 
 	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
+	flags "github.com/uber-go/flagoverride"
 	"gopkg.in/ns1/ns1-go.v2/rest/model/dns"
 )
 
 func (c *cmd) Run(args []string) int {
-	if len(args) != 1 {
-		c.UI.Error("zone create ony accepts a single argument")
-		c.UI.Info(c.Help())
+	flags.ParseArgs(&c.Flags, args)
+	if len(c.Flags.Zone) == 0 {
+		c.Ui.Error("zone option required")
+		c.Ui.Info(c.Help())
 		return 1
 	}
-	zone := args[0]
-	var z dns.Zone
-	if err := json.Unmarshal([]byte(zone), &z); err != nil {
-		c.UI.Error(err.Error())
+	z := &dns.Zone{}
+	if err := json.Unmarshal([]byte(c.Flags.Zone), z); err != nil {
+		c.Ui.Error(err.Error())
 		return 1
 	}
-	_, err := c.ns1.Zones.Update(&z)
+	_, err := c.Ns1.Zones.Update(z)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.UI.Info(helper.FormatZone(&z))
+	c.Ui.Info(helper.FormatZone(&c.Cmd, z))
 	return 0
 }

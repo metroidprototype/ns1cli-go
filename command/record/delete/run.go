@@ -1,21 +1,26 @@
 package delete
 
-import "fmt"
+import (
+	"fmt"
+
+	flags "github.com/uber-go/flagoverride"
+)
 
 func (c *cmd) Run(args []string) int {
-	if len(args) != 3 {
-		c.UI.Error("record delete requires three arguments")
-		c.UI.Info(c.Help())
+	flags.ParseArgs(&c.Flags, args)
+	if len(c.Flags.Zone) == 0 ||
+		len(c.Flags.Record) == 0 ||
+		len(c.Flags.Type) == 0 {
+		c.Ui.Error("zone, record and type options required")
+		c.Ui.Info(c.Help())
 		return 1
 	}
-	zone := args[0]
-	rec := args[1]
-	rType := args[2]
-	_, err := c.ns1.Records.Delete(zone, rec, rType)
+	rec := fmt.Sprintf("%s.%s", c.Flags.Record, c.Flags.Zone)
+	_, err := c.Ns1.Records.Delete(c.Flags.Zone, rec, c.Flags.Type)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.UI.Info(fmt.Sprintf("Record %s/%s/%s deleted.", zone, rec, rType))
+	c.Ui.Info(fmt.Sprintf("Record %s/%s deleted.", rec, c.Flags.Type))
 	return 0
 }

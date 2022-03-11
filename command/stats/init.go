@@ -1,8 +1,8 @@
-package record
+package stats
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
-	"github.com/metroidprototype/ns1cli-go/command/record/helper"
+	"github.com/metroidprototype/ns1cli-go/command/stats/helper"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
@@ -13,7 +13,7 @@ type cmd struct {
 }
 
 func init() {
-	err := command.Register("record", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui), nil })
+	err := command.Register("stats", func(ui cli.Ui, a *api.Client) (cli.Command, error) { return new(ui), nil })
 	if err != nil {
 		panic(err)
 	}
@@ -40,8 +40,8 @@ func (c *cmd) Run(args []string) int {
 	return cli.RunResultHelp
 }
 
-const synopsis = "Interact with records"
+const synopsis = "Interact with reporting and stats APIs"
 const help = `
 Usage:
-  ns1 record SUBCOMMAND
+  ns1 stats SUBCOMMAND
 `
