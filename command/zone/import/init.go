@@ -40,9 +40,15 @@ func (c *cmd) Help() string {
 
 const synopsis = "Import a zonefile"
 const help = `
-Usage: ns1 zone import [OPTIONS]
-  Options:
-    -zone ZONEFILE - zone file; required
+Usage:
+  ns1 zone import [OPTIONS]
+  
+Options:
+  -zone ZONEFILE - zone file; required
 
-Note: The ZONEFILE name is used as the imported zone name. i.e. a file named "./foo/bar.com" would import to the "bar.com" zone.
+Example:
+  ns1 zone import -zone ./foo.com
+
+Notes:
+  The ZONEFILE name is used as the imported zone name. i.e. a file named "./foo/bar.com" would import to the "bar.com" zone.
 `

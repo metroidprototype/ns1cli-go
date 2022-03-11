@@ -42,5 +42,6 @@ func (c *cmd) Run(args []string) int {
 
 const synopsis = "Interact with zones"
 const help = `
-Usage: ns1 zone SUBCOMMAND
+Usage:
+  ns1 zone SUBCOMMAND
 `

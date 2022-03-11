@@ -42,5 +42,6 @@ func (c *cmd) Run(args []string) int {
 
 const synopsis = "Interact with reporting and stats APIs"
 const help = `
-Usage: ns1 stats SUBCOMMAND
+Usage:
+  ns1 stats SUBCOMMAND
 `

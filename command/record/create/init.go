@@ -51,5 +51,6 @@ Options:
 Example:
   ns1 record create -record '{"zone":"example.com", "domain":"arecord.example.com", "type":"A", "answers":[{"answer":["1.2.3.4"]}]}'
 
-Full payload details can be found here: https://ns1.com/api#putcreate-a-dns-record
+Notes:
+  Full payload details can be found here: https://ns1.com/api#putcreate-a-dns-record
 `

@@ -39,11 +39,15 @@ func (c *cmd) Help() string {
 
 const synopsis = "Update a zone"
 const help = `
-Usage: ns1 zone update [OPTIONS]
-  Options:
-    -zone ZONE - json formatted zone object as defined by the ns1 API; required
+Usage:
+  ns1 zone update [OPTIONS]
 
-Example: ns1 zone update -zone '{"zone":"example.com", "nx_ttl":30, "expiry": 0}'
+Options:
+  -zone ZONE - json formatted zone object as defined by the ns1 API; required
 
-Full payload details can be found here: https://ns1.com/api#post-edit-a-zone
+Example:
+  ns1 zone update -zone '{"zone":"example.com", "nx_ttl":30, "expiry": 0}'
+
+Notes:
+  Full payload details can be found here: https://ns1.com/api#post-edit-a-zone
 `

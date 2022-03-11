@@ -40,11 +40,15 @@ func (c *cmd) Help() string {
 
 const synopsis = "Create a zone"
 const help = `
-Usage: ns1 zone create [OPTIONS]
-  Options:
-    -zone ZONE - json formatted zone object as defined by the ns1 API; required
+Usage:
+  ns1 zone create [OPTIONS]
+  
+Options:
+  -zone ZONE - json formatted zone object as defined by the ns1 API; required
 
-Example: ns1 zone create -zone '{"zone":"example.com", "nx_ttl":60}'
+Example:
+  ns1 zone create -zone '{"zone":"example.com", "nx_ttl":60}'
 
-Full payload details can be found here: https://ns1.com/api#put-create-a-new-zone
+Notes:
+  Full payload details can be found here: https://ns1.com/api#put-create-a-new-zone
 `

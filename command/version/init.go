@@ -42,5 +42,6 @@ func (c *cmd) Run(args []string) int {
 
 const synopsis = "Print the client version"
 const help = `
-Usage: ns1 version
+Usage:
+  ns1 version
 `

@@ -45,10 +45,15 @@ func (c *cmd) Help() string {
 
 const synopsis = "View QPS related stats"
 const help = `
-Usage: ns1 stats qps [OPTIONS]
-  Options:
-    -level LEVEL - account, zone or record-level qps; default: account
-    -zone ZONE - zone name; required for zone and record qps
-    -record FQDN - record fqdn; required for record qps
-    -type TYPE - record type; required for record qps
+Usage:
+  ns1 stats qps [OPTIONS]
+
+Options:
+  -level LEVEL - account, zone or record-level qps; default: account
+  -zone ZONE - zone name; required for zone and record qps
+  -record FQDN - record fqdn; required for record qps
+  -type TYPE - record type; required for record qps
+
+Example:
+  ns1 stats qps -level zone -zone foo.com
 `

@@ -40,9 +40,14 @@ func (c *cmd) Help() string {
 
 const synopsis = "View details on a single zone"
 const help = `
-Usage: ns1 zone info [OPTIONS]
-  Options:
-    -zone ZONENAME - zone name; required
-    -qps - include QPS metrics on each record over the last 24h; Note: may increase response time
-    -usage - include usage statistics on each record; TODO
+Usage:
+  ns1 zone info [OPTIONS]
+
+Options:
+  -zone ZONE - zone name; required
+  -qps - include QPS metrics on each record over the last 24h; Note: may increase response time
+  -usage - include usage statistics on each record; TODO
+
+Example:
+  ns1 zone info -zone foo.com
 `

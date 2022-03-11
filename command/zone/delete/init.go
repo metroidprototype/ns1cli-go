@@ -40,7 +40,12 @@ func (c *cmd) Help() string {
 
 const synopsis = "Delete a zone"
 const help = `
-Usage: ns1 zone delete [OPTIONS]
-  Options:
-    -zone ZONE - zone name; required
+Usage:
+  ns1 zone delete [OPTIONS]
+  
+Options:
+  -zone ZONE - zone name; required
+
+Example:
+  ns1 zone delete -zone foo.com
 `
