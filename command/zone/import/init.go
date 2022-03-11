@@ -4,14 +4,14 @@ package imp
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
+	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
 type cmd struct {
-	UI  cli.Ui
-	ns1 *api.Client
+	helper.Cmd
 }
 
 func init() {
@@ -22,11 +22,12 @@ func init() {
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {
-	c := &cmd{
-		UI:  ui,
-		ns1: a,
+	return &cmd{
+		Cmd: helper.Cmd{
+			Ui:  ui,
+			Ns1: a,
+		},
 	}
-	return c
 }
 
 func (c *cmd) Synopsis() string {
@@ -39,7 +40,9 @@ func (c *cmd) Help() string {
 
 const synopsis = "Import a zonefile"
 const help = `
-Usage: ns1 zone import ZONEFILE
+Usage: ns1 zone import [OPTIONS]
+  Options:
+    -zone ZONEFILE - zone file; required
 
-Note: The filename is used as the imported zone name.
+Note: The ZONEFILE name is used as the imported zone name. i.e. a file named "./foo/bar.com" would import to the "bar.com" zone.
 `

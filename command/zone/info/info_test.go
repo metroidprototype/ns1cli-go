@@ -68,5 +68,5 @@ func TestInfo(t *testing.T) {
 	buf.Reset()
 	res = cmd.Run([]string{"test.com"})
 	require.Equal(t, 0, res, buf.String())
-	require.Equal(t, helper.FormatZone(zone), strings.TrimSuffix(buf.String(), "\n"))
+	require.Equal(t, helper.FormatZone(ui, ns1, zone, false, false), strings.TrimSuffix(buf.String(), "\n"))
 }

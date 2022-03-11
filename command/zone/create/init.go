@@ -4,14 +4,14 @@ package create
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
+	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
 type cmd struct {
-	UI  cli.Ui
-	ns1 *api.Client
+	helper.Cmd
 }
 
 func init() {
@@ -22,11 +22,12 @@ func init() {
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {
-	c := &cmd{
-		UI:  ui,
-		ns1: a,
+	return &cmd{
+		Cmd: helper.Cmd{
+			Ui:  ui,
+			Ns1: a,
+		},
 	}
-	return c
 }
 
 func (c *cmd) Synopsis() string {
@@ -39,9 +40,11 @@ func (c *cmd) Help() string {
 
 const synopsis = "Create a zone"
 const help = `
-Usage: ns1 zone create [options] ZONE
+Usage: ns1 zone create [OPTIONS]
+  Options:
+    -zone ZONE - json formatted zone object as defined by the ns1 API; required
 
-Example: ns1 zone create '{"zone":"example.com", "nx_ttl":60}'
+Example: ns1 zone create -zone '{"zone":"example.com", "nx_ttl":60}'
 
-Ful payload deatuls can be found here: https://ns1.com/api#put-create-a-new-zone
+Full payload details can be found here: https://ns1.com/api#put-create-a-new-zone
 `

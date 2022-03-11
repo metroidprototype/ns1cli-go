@@ -11,26 +11,27 @@ import (
 
 	"github.com/metroidprototype/ns1cli-go/command/zone/helper"
 
+	flags "github.com/uber-go/flagoverride"
 	"gopkg.in/ns1/ns1-go.v2/rest/model/dns"
 )
 
 func (c *cmd) Run(args []string) int {
-	if len(args) != 1 {
-		c.UI.Error("zone import only accepts 1 argument")
-		c.UI.Info(c.Help())
+	flags.ParseArgs(&c.Flags, args)
+	if len(c.Flags.Zone) == 0 {
+		c.Ui.Error("zone option required")
+		c.Ui.Info(c.Help())
 		return 1
 	}
-	filename := args[0]
-	file, err := os.Open(filename)
+	file, err := os.Open(c.Flags.Zone)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
 	defer file.Close()
 
 	fi, err := file.Stat()
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
 
@@ -38,7 +39,7 @@ func (c *cmd) Run(args []string) int {
 	writer := multipart.NewWriter(body)
 	part, err := writer.CreateFormFile("zonefile", fi.Name())
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
 	io.Copy(part, file)
@@ -47,21 +48,21 @@ func (c *cmd) Run(args []string) int {
 	path := fmt.Sprintf("import/zonefile/%s", fi.Name())
 	req, err := c.newImportRequest("PUT", path, body)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
 	req.Header.Add("Content-Type", writer.FormDataContentType())
 
 	zone := &dns.Zone{}
-	_, err = c.ns1.Do(req, &zone)
+	_, err = c.Ns1.Do(req, &zone)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
 
-	c.UI.Info("Zonefile Imported.")
+	c.Ui.Info("Zonefile Imported.")
 	if zone != nil {
-		c.UI.Info(helper.FormatZone(zone))
+		c.Ui.Info(helper.FormatZone(c.Ui, c.Ns1, zone, false, false))
 	}
 	return 0
 }
@@ -74,12 +75,12 @@ func (c *cmd) newImportRequest(method, path string, body *bytes.Buffer) (*http.R
 		return nil, err
 	}
 
-	uri := c.ns1.Endpoint.ResolveReference(rel)
+	uri := c.Ns1.Endpoint.ResolveReference(rel)
 	req, err := http.NewRequest(method, uri.String(), body)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add("X-NSONE-Key", c.ns1.APIKey)
-	req.Header.Add("User-Agent", c.ns1.UserAgent)
+	req.Header.Add("X-NSONE-Key", c.Ns1.APIKey)
+	req.Header.Add("User-Agent", c.Ns1.UserAgent)
 	return req, nil
 }
