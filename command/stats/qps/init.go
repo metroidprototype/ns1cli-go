@@ -43,7 +43,7 @@ func (c *cmd) Help() string {
 	return help
 }
 
-const synopsis = "View QPS related stats"
+const synopsis = "View QPS related stats over the last 24h"
 const help = `
 Usage:
   ns1 stats qps [OPTIONS]

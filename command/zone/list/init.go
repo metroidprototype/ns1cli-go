@@ -45,7 +45,6 @@ Usage:
 
 Options:
   -qps - include QPS metrics on each zone over the last 24h; Note: may increase response time
-  -usage - include usage statistics on each zone; TODO
 
 Example:
   ns1 zone list

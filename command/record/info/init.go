@@ -49,6 +49,7 @@ Options:
   -zone ZONE - zone name; required
   -record RECORD - record name not including the zone; required
   -type TYPE - record type; required
+  -qps - include QPS metrics on each record over the last 24h; Note: may increase response time
 
 Example:
   ns1 record info -zone foo.com -record bar -type CNAME

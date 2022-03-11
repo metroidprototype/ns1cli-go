@@ -46,7 +46,6 @@ Usage:
 Options:
   -zone ZONE - zone name; required
   -qps - include QPS metrics on each record over the last 24h; Note: may increase response time
-  -usage - include usage statistics on each record; TODO
 
 Example:
   ns1 zone info -zone foo.com
