@@ -4,22 +4,14 @@ package qps
 
 import (
 	"github.com/metroidprototype/ns1cli-go/command"
+	"github.com/metroidprototype/ns1cli-go/command/stats/helper"
 
 	"github.com/mitchellh/cli"
 	api "gopkg.in/ns1/ns1-go.v2/rest"
 )
 
 type cmd struct {
-	UI    cli.Ui
-	ns1   *api.Client
-	flags flag
-}
-
-type flag struct {
-	Level  string
-	Zone   string
-	Record string
-	Type   string
+	helper.Cmd
 }
 
 var cmd_name = "stats qps"
@@ -32,14 +24,15 @@ func init() {
 }
 
 func new(ui cli.Ui, a *api.Client) *cmd {
-	c := &cmd{
-		UI:  ui,
-		ns1: a,
-		flags: flag{
-			Level: "account",
+	return &cmd{
+		Cmd: helper.Cmd{
+			Ui:  ui,
+			Ns1: a,
+			Flags: helper.Flag{
+				Level: "account",
+			},
 		},
 	}
-	return c
 }
 
 func (c *cmd) Synopsis() string {
@@ -55,7 +48,7 @@ const help = `
 Usage: ns1 stats qps [OPTIONS]
   Options:
     -level LEVEL - account, zone or record-level qps; default: account
-    -zone ZONENAME - zone name; required for zone and record qps
+    -zone ZONE - zone name; required for zone and record qps
     -record FQDN - record fqdn; required for record qps
     -type TYPE - record type; required for record qps
 `
