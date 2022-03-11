@@ -1,21 +1,28 @@
 package info
 
-import "github.com/metroidprototype/ns1cli-go/command/record/helper"
+import (
+	"fmt"
+
+	"github.com/metroidprototype/ns1cli-go/command/record/helper"
+
+	flags "github.com/uber-go/flagoverride"
+)
 
 func (c *cmd) Run(args []string) int {
-	if len(args) != 3 {
-		c.UI.Error("record info requires three arguments")
-		c.UI.Info(c.Help())
+	flags.ParseArgs(&c.Flags, args)
+	if len(c.Flags.Zone) == 0 ||
+		len(c.Flags.Record) == 0 ||
+		len(c.Flags.Type) == 0 {
+		c.Ui.Error("zone, record and type options required")
+		c.Ui.Info(c.Help())
 		return 1
 	}
-	zone := args[0]
-	domain := args[1]
-	rType := args[2]
-	z, _, err := c.ns1.Records.Get(zone, domain, rType)
+	rec := fmt.Sprintf("%s.%s", c.Flags.Record, c.Flags.Zone)
+	z, _, err := c.Ns1.Records.Get(c.Flags.Zone, rec, c.Flags.Type)
 	if err != nil {
-		c.UI.Error(err.Error())
+		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.UI.Info(helper.FormatRecord(z))
+	c.Ui.Info(helper.FormatRecord(z))
 	return 0
 }

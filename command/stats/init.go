@@ -20,12 +20,11 @@ func init() {
 }
 
 func new(ui cli.Ui) *cmd {
-	c := &cmd{
+	return &cmd{
 		Cmd: helper.Cmd{
 			Ui: ui,
 		},
 	}
-	return c
 }
 
 func (c *cmd) Synopsis() string {
