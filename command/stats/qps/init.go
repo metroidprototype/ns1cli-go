@@ -1,5 +1,5 @@
-// This package implements the record info API
-// https://ns1.com/api#getview-record-details
+// This package implements the qps APIs
+// https://ns1.com/api#qps
 package qps
 
 import (
