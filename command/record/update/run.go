@@ -16,19 +16,19 @@ func (c *cmd) Run(args []string) int {
 		c.Ui.Info(c.Help())
 		return 1
 	}
-	var r dns.Record
-	if err := json.Unmarshal([]byte(c.Flags.Record), &r); err != nil {
+	r := &dns.Record{}
+	if err := json.Unmarshal([]byte(c.Flags.Record), r); err != nil {
 		c.Ui.Error(err.Error())
 		return 1
 	}
 	if r.Filters == nil {
 		r.Filters = make([]*filter.Filter, 0)
 	}
-	_, err := c.Ns1.Records.Update(&r)
+	_, err := c.Ns1.Records.Update(r)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.Ui.Info(helper.FormatRecord(&r))
+	c.Ui.Info(helper.FormatRecord(&c.Cmd, r))
 	return 0
 }

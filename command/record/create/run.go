@@ -29,6 +29,6 @@ func (c *cmd) Run(args []string) int {
 		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.Ui.Info(helper.FormatRecord(r))
+	c.Ui.Info(helper.FormatRecord(&c.Cmd, r))
 	return 0
 }

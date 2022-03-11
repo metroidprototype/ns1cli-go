@@ -18,11 +18,11 @@ func (c *cmd) Run(args []string) int {
 		return 1
 	}
 	rec := fmt.Sprintf("%s.%s", c.Flags.Record, c.Flags.Zone)
-	z, _, err := c.Ns1.Records.Get(c.Flags.Zone, rec, c.Flags.Type)
+	r, _, err := c.Ns1.Records.Get(c.Flags.Zone, rec, c.Flags.Type)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.Ui.Info(helper.FormatRecord(z))
+	c.Ui.Info(helper.FormatRecord(&c.Cmd, r))
 	return 0
 }
