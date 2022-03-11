@@ -39,12 +39,12 @@ type Record struct {
 	Usage    int
 }
 
-func FormatZone(ui cli.Ui, ns1 *api.Client, z *dns.Zone, qps bool, usage bool) string {
+func FormatZone(c *Cmd, z *dns.Zone) string {
 	header := "Domain | TTL | Type | Answers"
-	if qps {
+	if c.Flags.QPS {
 		header = fmt.Sprintf("%s | QPS (24h)", header)
 	}
-	if usage {
+	if c.Flags.Usage {
 		header = fmt.Sprintf("%s | Usage", header)
 	}
 	result := []string{header}
@@ -52,10 +52,10 @@ func FormatZone(ui cli.Ui, ns1 *api.Client, z *dns.Zone, qps bool, usage bool) s
 		record := fmt.Sprintf("%s | %d | %s | %s",
 			rec.Domain, rec.TTL, rec.Type, strings.Join(rec.ShortAns, ", "),
 		)
-		if qps {
-			qps, _, err := ns1.Stats.GetRecordQPS(z.Zone, rec.Domain, rec.Type)
+		if c.Flags.QPS {
+			qps, _, err := c.Ns1.Stats.GetRecordQPS(z.Zone, rec.Domain, rec.Type)
 			if err != nil {
-				ui.Warn(fmt.Sprintf("failed to get QPS for %s", rec.Domain))
+				c.Ui.Warn(fmt.Sprintf("failed to get QPS for %s", rec.Domain))
 			} else {
 				record = fmt.Sprintf("%s | %.2f", record, qps)
 			}

@@ -62,7 +62,7 @@ func (c *cmd) Run(args []string) int {
 
 	c.Ui.Info("Zonefile Imported.")
 	if zone != nil {
-		c.Ui.Info(helper.FormatZone(c.Ui, c.Ns1, zone, false, false))
+		c.Ui.Info(helper.FormatZone(&c.Cmd, zone))
 	}
 	return 0
 }

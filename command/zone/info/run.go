@@ -19,6 +19,6 @@ func (c *cmd) Run(args []string) int {
 		return 1
 	}
 
-	c.Ui.Info(helper.FormatZone(c.Ui, c.Ns1, z, c.Flags.QPS, c.Flags.Usage))
+	c.Ui.Info(helper.FormatZone(&c.Cmd, z))
 	return 0
 }

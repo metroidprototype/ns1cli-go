@@ -25,6 +25,6 @@ func (c *cmd) Run(args []string) int {
 		c.Ui.Error(err.Error())
 		return 1
 	}
-	c.Ui.Info(helper.FormatZone(c.Ui, c.Ns1, z, false, false))
+	c.Ui.Info(helper.FormatZone(&c.Cmd, z))
 	return 0
 }
