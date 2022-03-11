@@ -20,32 +20,14 @@ type Cmd struct {
 
 // Flag represents all flags used by zone commands
 type Flag struct {
-	Zone  string
-	QPS   bool
-	Usage bool
-}
-
-type Zone struct {
-	Name    string
-	Records []Record
-}
-
-type Record struct {
-	Domain   string
-	TTL      int
-	Type     string
-	ShortAns []string
-	QPS      float32
-	Usage    int
+	Zone string
+	QPS  bool
 }
 
 func FormatZone(c *Cmd, z *dns.Zone) string {
 	header := "Domain | TTL | Type | Answers"
 	if c.Flags.QPS {
 		header = fmt.Sprintf("%s | QPS (24h)", header)
-	}
-	if c.Flags.Usage {
-		header = fmt.Sprintf("%s | Usage", header)
 	}
 	result := []string{header}
 	for _, rec := range z.Records {

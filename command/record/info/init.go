@@ -42,7 +42,8 @@ func (c *cmd) Help() string {
 
 const synopsis = "View details on a single record"
 const help = `
-Usage: ns1 record info [OPTIONS]
+Usage:
+  ns1 record info [OPTIONS]
 
 Options:
   -zone ZONE - zone name; required

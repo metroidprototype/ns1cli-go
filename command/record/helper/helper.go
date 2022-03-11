@@ -21,7 +21,6 @@ type Flag struct {
 	Record string
 	Type   string
 	QPS    bool
-	Usage  bool
 }
 
 func FormatRecord(c *Cmd, rec *dns.Record) string {
