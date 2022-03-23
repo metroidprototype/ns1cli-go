@@ -36,7 +36,13 @@ func (c *cmd) Run(args []string) int {
 		return 1
 	}
 
-	usage, err := GetUsage(c, path)
+	cmd := &helper.Cmd{
+		Ui:    c.Ui,
+		Ns1:   c.Ns1,
+		Flags: c.Flags,
+	}
+
+	usage, err := GetUsage(cmd, path)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1

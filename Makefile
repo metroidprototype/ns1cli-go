@@ -25,7 +25,7 @@ build.%:
 	done
 
 
-build-all: build.darwin build.linux build.windows
+build-all: clean build.darwin build.linux build.windows
 	@mv dist/ns1-windows-amd64 dist/ns1-windows-amd64.exe
 	@mv dist/ns1-windows-arm64 dist/ns1-windows-arm64.exe
 
