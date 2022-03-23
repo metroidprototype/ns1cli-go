@@ -36,7 +36,7 @@ func (c *cmd) Run(args []string) int {
 		return 1
 	}
 
-	usage, err := c.GetUsage(path, c.Flags)
+	usage, err := GetUsage(c, path)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
@@ -59,23 +59,24 @@ func (c *cmd) Run(args []string) int {
 }
 
 // getUsage is a function to pull usage stats from ns1
-func (c *cmd) GetUsage(path string, flag helper.Flag) (int64, error) {
+func GetUsage(c interface{}, path string) (int64, error) {
+	cli := c.(*helper.Cmd)
 	rel, err := url.Parse(path)
 	if err != nil {
 		return 0, err
 	}
 
-	uri := c.Ns1.Endpoint.ResolveReference(rel)
-	url := fmt.Sprintf("%s?period=%s&networks=%s", uri, c.Flags.Period, c.Flags.Networks)
+	uri := cli.Ns1.Endpoint.ResolveReference(rel)
+	url := fmt.Sprintf("%s?period=%s&networks=%s", uri, cli.Flags.Period, cli.Flags.Networks)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return 0, err
 	}
-	req.Header.Add("X-NSONE-Key", c.Ns1.APIKey)
-	req.Header.Add("User-Agent", c.Ns1.UserAgent)
+	req.Header.Add("X-NSONE-Key", cli.Ns1.APIKey)
+	req.Header.Add("User-Agent", cli.Ns1.UserAgent)
 
 	usage := make([]helper.Usage, 1)
-	_, err = c.Ns1.Do(req, &usage)
+	_, err = cli.Ns1.Do(req, &usage)
 	if err != nil {
 		return 0, err
 	}
