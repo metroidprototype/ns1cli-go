@@ -17,10 +17,20 @@ type Cmd struct {
 }
 
 type Flag struct {
-	Level  string
-	Zone   string
-	Record string
-	Type   string
+	Level    string
+	Zone     string
+	Record   string
+	Type     string
+	Period   string
+	Networks string
+}
+
+type Usage struct {
+	Queries int64  `json:"queries,omitempty"`
+	Zone    string `json:"zone,omitempty"`
+	Domain  string `json:"domain,omitempty"`
+	Type    string `json:"rectype,omitempty"`
+	Period  string `json:"period,omitempty"`
 }
 
 func FormatRecord(rec *dns.Record) string {
