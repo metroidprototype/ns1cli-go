@@ -3,4 +3,5 @@ package stats
 
 import (
 	_ "github.com/metroidprototype/ns1cli-go/command/stats/qps"
+	_ "github.com/metroidprototype/ns1cli-go/command/stats/usage"
 )

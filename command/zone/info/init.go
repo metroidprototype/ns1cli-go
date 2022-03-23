@@ -26,6 +26,9 @@ func new(ui cli.Ui, a *api.Client) *cmd {
 		Cmd: helper.Cmd{
 			Ui:  ui,
 			Ns1: a,
+			Flags: helper.Flag{
+				Period: "24h",
+			},
 		},
 	}
 }
@@ -45,7 +48,9 @@ Usage:
 
 Options:
   -zone ZONE - zone name; required
-  -qps - include QPS metrics on each record over the last 24h; Note: may increase response time
+  -qps - include QPS metrics on each record over the last 24h; Note: will increase response time
+  -usage - include query stats over a given period; Note: will increase response time
+  -period PERIOD - Relative time. Possible values: 1h, 24h, 30d; default: 24h
 
 Example:
   ns1 zone info -zone foo.com
