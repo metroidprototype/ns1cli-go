@@ -35,8 +35,8 @@ func (c *cmd) Run(args []string) int {
 		c.Ui.Error(fmt.Sprintf("unknown usage level: %s", c.Flags.Level))
 		return 1
 	}
-	usage := make([]helper.Usage, 1)
-	err := c.GetUsage(path, c.Flags, &usage)
+
+	usage, err := c.GetUsage(path, c.Flags)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
@@ -44,35 +44,40 @@ func (c *cmd) Run(args []string) int {
 
 	switch c.Flags.Level {
 	case "account":
-		output = fmt.Sprintf("%d queries in the last %s across the account.", usage[0].Queries, usage[0].Period)
+		output = fmt.Sprintf("%d queries in the last %s across the account.",
+			usage, c.Flags.Period)
 	case "zone":
-		output = fmt.Sprintf("%s: %d queries in the last %s.", usage[0].Zone, usage[0].Queries, usage[0].Period)
+		output = fmt.Sprintf("%s: %d queries in the last %s.",
+			c.Flags.Zone, usage, c.Flags.Period)
 	case "record":
-		output = fmt.Sprintf("%s/%s: %d queries in the last %s.", usage[0].Domain, usage[0].Type, usage[0].Queries, usage[0].Period)
+		output = fmt.Sprintf("%s/%s: %d queries in the last %s.",
+			fmt.Sprintf("%s.%s", c.Flags.Record, c.Flags.Zone),
+			c.Flags.Type, usage, c.Flags.Period)
 	}
 	c.Ui.Info(output)
 	return 0
 }
 
 // getUsage is a function to pull usage stats from ns1
-func (c *cmd) GetUsage(path string, flag helper.Flag, res *[]helper.Usage) error {
+func (c *cmd) GetUsage(path string, flag helper.Flag) (int64, error) {
 	rel, err := url.Parse(path)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	uri := c.Ns1.Endpoint.ResolveReference(rel)
 	url := fmt.Sprintf("%s?period=%s&networks=%s", uri, c.Flags.Period, c.Flags.Networks)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return err
+		return 0, err
 	}
 	req.Header.Add("X-NSONE-Key", c.Ns1.APIKey)
 	req.Header.Add("User-Agent", c.Ns1.UserAgent)
 
-	_, err = c.Ns1.Do(req, &res)
+	usage := make([]helper.Usage, 1)
+	_, err = c.Ns1.Do(req, &usage)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return nil
+	return usage[0].Queries, nil
 }
